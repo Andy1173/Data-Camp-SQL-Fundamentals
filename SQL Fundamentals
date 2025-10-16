@@ -17,3 +17,43 @@ WHERE countries.code = sub.code
 ORDER BY lang_num DESC;
 
 
+
+query.sql
+solution.sql
+123456789
+-- Select local_name and lang_num from appropriate tables
+SELECT local_name, sub.lang_num
+FROM countries,
+    (SELECT code, COUNT(*) AS lang_num
+     FROM languages
+     GROUP BY code) AS sub
+-- Where codes match    
+WHERE countries.code = sub.code
+ORDER BY lang_num DESC;
+
+
+
+
+Let's break down the solution to understand how it addresses the exercise requirements:
+
+Subquery Creation:
+
+The subquery (SELECT code, COUNT(*) AS lang_num FROM languages GROUP BY code) AS sub is designed to count the number of languages associated with each country code.
+SELECT code, COUNT(*) AS lang_num selects the code from the languages table and counts the number of entries for each code, which represents the number of languages spoken in each country.
+GROUP BY code ensures that the count is performed for each unique country code.
+The subquery is aliased as sub, which allows us to reference it later in the main query.
+Main Query:
+
+SELECT local_name, sub.lang_num specifies that we want to retrieve the local_name from the countries table and the lang_num from the subquery.
+FROM countries, (subquery) AS sub indicates that we are selecting data from the countries table and the subquery result, which is aliased as sub.
+Joining the Tables:
+
+WHERE countries.code = sub.code is the condition that joins the countries table with the subquery result. It ensures that we only combine rows where the code in the countries table matches the code in the subquery. This is crucial for associating each country's local name with the correct number of languages.
+Ordering the Results:
+
+ORDER BY lang_num DESC sorts the results in descending order based on the number of languages (lang_num). This means countries with more languages will appear first in the result set.
+By following these steps, the solution effectively retrieves the local names of countries along with the number of languages spoken in each, matching the code fields to ensure accurate data association.
+
+
+
+
