@@ -18,21 +18,6 @@ ORDER BY lang_num DESC;
 
 
 
-query.sql
-solution.sql
-123456789
--- Select local_name and lang_num from appropriate tables
-SELECT local_name, sub.lang_num
-FROM countries,
-    (SELECT code, COUNT(*) AS lang_num
-     FROM languages
-     GROUP BY code) AS sub
--- Where codes match    
-WHERE countries.code = sub.code
-ORDER BY lang_num DESC;
-
-
-
 
 Let's break down the solution to understand how it addresses the exercise requirements:
 
@@ -53,6 +38,22 @@ Ordering the Results:
 
 ORDER BY lang_num DESC sorts the results in descending order based on the number of languages (lang_num). This means countries with more languages will appear first in the result set.
 By following these steps, the solution effectively retrieves the local names of countries along with the number of languages spoken in each, matching the code fields to ensure accurate data association.
+
+
+
+Sub Query Challenge:
+
+Suppose you're interested in analyzing inflation and unemployment rate for certain countries in 2015. You are interested in countries with "Republic" or "Monarchy" as their form of government.
+
+You will use the field gov_form to filter for these two conditions, which represents a country's form of government. You can review the different entries for gov_form in the countries table.
+
+
+Instructions:
+
+Select country code, inflation_rate, and unemployment_rate from economies.
+Filter code for the set of countries which contain the words "Republic" or "Monarchy" in their gov_form.
+
+
 
 
 
